@@ -18,24 +18,28 @@ const COLORS = [
 ];
 
 export default function ExpenseChartPremium({
-  data,
+  data = [],
 }) {
-  if (!data.length) return null;
+  if (!Array.isArray(data) || !data.length) {
+    return null;
+  }
 
-  const total =
-    data.reduce(
-      (
-        sum,
-        item
-      ) =>
-        sum +
-        item.value,
-      0
-    );
+  const safeData = data.filter(
+    (item) =>
+      item &&
+      item.name &&
+      !isNaN(Number(item.value))
+  );
+
+  const total = safeData.reduce(
+    (sum, item) =>
+      sum +
+      Number(item.value || 0),
+    0
+  );
 
   return (
     <div className="card">
-
       <h2>
         STRUKTURA WYDATKÓW
       </h2>
@@ -46,17 +50,14 @@ export default function ExpenseChartPremium({
       >
         <PieChart>
           <Pie
-            data={data}
+            data={safeData}
             dataKey="value"
             nameKey="name"
             innerRadius={60}
             outerRadius={90}
           >
-            {data.map(
-              (
-                entry,
-                index
-              ) => (
+            {safeData.map(
+              (entry, index) => (
                 <Cell
                   key={index}
                   fill={
@@ -74,48 +75,42 @@ export default function ExpenseChartPremium({
         </PieChart>
       </ResponsiveContainer>
 
-      {data
+      {[...safeData]
         .sort(
-          (
-            a,
-            b
-          ) =>
-            b.value -
-            a.value
+          (a, b) =>
+            Number(b.value) -
+            Number(a.value)
         )
-        .map(
-          (
-            item,
-            index
-          ) => (
-            <div
-              key={item.name}
-              style={{
-                display:
-                  "flex",
-                justifyContent:
-                  "space-between",
-                marginBottom:
-                  "12px",
-              }}
-            >
-              <span>
-                {item.name}
-              </span>
+        .map((item) => (
+          <div
+            key={item.name}
+            style={{
+              display: "flex",
+              justifyContent:
+                "space-between",
+              marginBottom: "12px",
+            }}
+          >
+            <span>
+              {item.name}
+            </span>
 
-              <span>
-                {item.value}
-                {" zł | "}
-                {(
-                  (item.value /
-                    total) *
-                  100
-                ).toFixed(1)}
-                %
-              </span>
-            </div>
-          )
-        )}
+            <span>
+              {Number(item.value)} zł
+              {" | "}
+              {total > 0
+                ? (
+                    (Number(
+                      item.value
+                    ) /
+                      total) *
+                    100
+                  ).toFixed(1)
+                : "0.0"}
+              %
+            </span>
+          </div>
+        ))}
     </div>
   );
 }

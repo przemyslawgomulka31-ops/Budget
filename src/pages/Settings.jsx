@@ -1,7 +1,4 @@
-import {
-  exportData,
-  importData,
-} from "../utils/backup";
+import {exportData,importData,} from "../utils/backup";
 
 export default function Settings() {
   return (

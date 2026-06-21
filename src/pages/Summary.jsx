@@ -4,9 +4,7 @@ import MonthSelector from "../components/MonthSelector";
 
 import Habits from "../components/Habits";
 import CategoriesSummary from "../components/CategoriesSummary";
-import {
-  getTransactions,
-} from "../db/budgetDB";
+import {getTransactions,} from "../db/budgetDB";
 
 export default function Summary() {
   const [month, setMonth] =

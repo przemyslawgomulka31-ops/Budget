@@ -2,6 +2,14 @@
 GLOBAL
 ========================= */
 
+<<<<<<< HEAD
+=======
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+>>>>>>> acbf889 (Fix Vercel build)
 
 html {
 -webkit-text-size-adjust: 100%;

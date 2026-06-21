@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getTransactions } from "../db/budgetDB";
-import PieChart
-from "../components/PieChart";
-import IncomeChart
-from "../components/IncomeChart";
-import ExpenseChartPremium
-from "../components/ExpenseChartPremium";
+import PieChart from "../components/PieChart";
+import IncomeChart from "../components/IncomeChart";
+import ExpenseChartPremium from "../components/ExpenseChartPremium";
 export default function Home() {
   const navigate = useNavigate();
 
@@ -139,10 +136,10 @@ monthData
       "Inne";
 
     incomeTypes[key] =
-      (incomeTypes[key] || 0) +
-      item.amount;
+  (incomeTypes[key] || 0) +
+  Number(item.amount || 0);
   });
-
+console.log(incomeTypes);
 setIncomeChart(
   Object.entries(
     incomeTypes
@@ -176,11 +173,9 @@ monthData
       ] = 0;
     }
 
-    categories[
-      category
-    ] += item.amount;
+   categories[category] += Number(item.amount || 0);
   });
-
+console.log(categories);
 setExpenseChart(
   Object.entries(
     categories

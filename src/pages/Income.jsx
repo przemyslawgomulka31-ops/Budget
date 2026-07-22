@@ -4,11 +4,12 @@ import MonthSelector from "../components/MonthSelector";
 import IncomeForm from "../components/IncomeForm";
 import Toast from "../components/Toast";
 import { addTransaction, deleteTransaction, getRegularIncome, getTransactions } from "../db/budgetDB";
+import { localMonth } from "../utils/date";
 const money = (value) => `${Number(value).toLocaleString("pl-PL", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} zł`;
 const formatDate = (value) => new Date(value).toLocaleDateString("pl-PL", { day: "numeric", month: "long" });
 const types = { regular: "Regularny", oneTime: "Jednorazowy", investment: "Inwestycyjny" };
 export default function Income() {
-  const [items, setItems] = useState([]); const [month, setMonth] = useState(new Date().toISOString().slice(0, 7)); const [showForm, setShowForm] = useState(false); const [editing, setEditing] = useState(null); const [toast, setToast] = useState("");
+  const [items, setItems] = useState([]); const [month, setMonth] = useState(localMonth()); const [showForm, setShowForm] = useState(false); const [editing, setEditing] = useState(null); const [toast, setToast] = useState("");
   async function load() { setItems((await getTransactions()).filter((item) => item.type === "income" && item.month === month).sort((a, b) => (b.date || "").localeCompare(a.date || ""))); }
   async function generate() { const data = await getTransactions(); if (data.some((item) => item.type === "income" && item.month === month)) return; for (const item of await getRegularIncome()) await addTransaction({ title: item.title, amount: item.amount, type: "income", subtype: "regular", month, date: `${month}-01`, generated: true, createdAt: new Date().toISOString() }); }
   useEffect(() => { async function init() { await generate(); await load(); } init(); }, [month]);

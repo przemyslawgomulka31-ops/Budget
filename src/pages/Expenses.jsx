@@ -5,11 +5,12 @@ import MonthSelector from "../components/MonthSelector";
 import Toast from "../components/Toast";
 import { addTransaction, deleteTransaction, getRegularExpenses, getTransactions } from "../db/budgetDB";
 import { EXPENSE_CATEGORIES } from "../utils/autoCategories";
+import { localMonth } from "../utils/date";
 
 const formatDate = (value) => new Date(value).toLocaleDateString("pl-PL", { day: "numeric", month: "long" });
 const money = (value) => `${Number(value).toLocaleString("pl-PL", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} zł`;
 export default function Expenses() {
-  const [items, setItems] = useState([]); const [month, setMonth] = useState(new Date().toISOString().slice(0, 7));
+  const [items, setItems] = useState([]); const [month, setMonth] = useState(localMonth());
   const [showForm, setShowForm] = useState(false); const [editingItem, setEditingItem] = useState(null); const [query, setQuery] = useState(""); const [category, setCategory] = useState(""); const [toast, setToast] = useState("");
   async function loadData() { setItems((await getTransactions()).filter((item) => item.type === "expense" && item.month === month).sort((a, b) => (b.date || "").localeCompare(a.date || ""))); }
   async function generateMonth() { const all = await getTransactions(); if (all.some((item) => item.type === "expense" && item.month === month)) return; for (const item of await getRegularExpenses()) await addTransaction({ title: item.title, amount: item.amount, type: "expense", subtype: "regular", month, date: `${month}-01`, category: item.category || "Inne", generated: true, createdAt: new Date().toISOString() }); }

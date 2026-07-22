@@ -71,8 +71,7 @@ export default function IncomeChart({
 
       {data.map(
         (
-          item,
-          index
+          item
         ) => (
           <div
             key={item.name}

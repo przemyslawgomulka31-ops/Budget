@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-import {FaHome,FaArrowUp,FaArrowDown,FaChartBar,FaCog,} from "react-icons/fa";
+import {FaHome,FaArrowUp,FaArrowDown,FaChartBar,FaCog,FaBullseye,} from "react-icons/fa";
 
 export default function BottomNav() {
   return (
@@ -41,6 +41,11 @@ export default function BottomNav() {
       >
         <FaArrowDown />
         Wydatki
+      </NavLink>
+
+      <NavLink to="/limits" className={({ isActive }) => isActive ? "nav-item active-nav" : "nav-item"}>
+        <FaBullseye />
+        Limity
       </NavLink>
 
       <NavLink

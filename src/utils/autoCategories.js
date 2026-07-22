@@ -1,189 +1,50 @@
-export const autoCategories = {
-  // JEDZENIE
+export const EXPENSE_CATEGORIES = [
+  "Codzienne zakupy", "Transport", "Rachunki", "Używki",
+  "Koszty przyszłego dochodu", "Dom", "Rozrywka", "Zdrowie", "Sport",
+  "Auto", "Finanse", "Inwestycje", "Podróże", "Fotografia", "Piłka nożna",
+  "Randki", "Zakupy internetowe", "Głupoty", "Inne",
+];
 
-  "żabka": "Jedzenie",
-  "biedronka": "Jedzenie",
-  "lidl": "Jedzenie",
-  "aldi": "Jedzenie",
-  "kaufland": "Jedzenie",
-  "auchan": "Jedzenie",
-  "carrefour": "Jedzenie",
-  "stokrotka": "Jedzenie",
-  "dino": "Jedzenie",
-
-  "mcdonald": "Jedzenie",
-  "kfc": "Jedzenie",
-  "burger king": "Jedzenie",
-  "pizza": "Jedzenie",
-  "pizzeria": "Jedzenie",
-  "kebab": "Jedzenie",
-  "sushi": "Jedzenie",
-
-  "kawa": "Jedzenie",
-  "coffee": "Jedzenie",
-
-  // TRANSPORT
-
-  "orlen": "Transport",
-  "shell": "Transport",
-  "bp": "Transport",
-  "circle k": "Transport",
-  "moya": "Transport",
-
-  "uber": "Transport",
-  "bolt": "Transport",
-
-  "pkp": "Transport",
-  "intercity": "Transport",
-
-  // DOM
-
-  "czynsz": "Dom",
-  "prąd": "Dom",
-  "energia": "Dom",
-  "gaz": "Dom",
-  "woda": "Dom",
-
-  "ikea": "Dom",
-  "leroy": "Dom",
-  "castorama": "Dom",
-  "obi": "Dom",
-
-  // ROZRYWKA
-
-  "netflix": "Rozrywka",
-  "spotify": "Rozrywka",
-  "youtube": "Rozrywka",
-  "hbo": "Rozrywka",
-  "disney": "Rozrywka",
-  "prime": "Rozrywka",
-
-  "kino": "Rozrywka",
-
-  // SPORT
-
-  "siłownia": "Sport",
-  "gym": "Sport",
-  "fitness": "Sport",
-  "decathlon": "Sport",
-
-  // ZDROWIE
-
-  "apteka": "Zdrowie",
-  "dentysta": "Zdrowie",
-  "lekarz": "Zdrowie",
-  "medicover": "Zdrowie",
-  "luxmed": "Zdrowie",
-
-  // AUTO
-
-  "opony": "Auto",
-  "warsztat": "Auto",
-  "mechanik": "Auto",
-  "olej": "Auto",
-  "przegląd": "Auto",
-
-  // FINANSE
-
-  "kredyt": "Finanse",
-  "pożyczka": "Finanse",
-
-  // PODRÓŻE
-
-"booking": "Podróże",
-"airbnb": "Podróże",
-"ryanair": "Podróże",
-"wizzair": "Podróże",
-"lot": "Podróże",
-"hotel": "Podróże",
-"nocleg": "Podróże",
-"wakacje": "Podróże",
-"urlop": "Podróże",
-
-// HOBBY - PIŁKA
-
-"piłka": "Piłka nożna",
-"football": "Piłka nożna",
-"boisko": "Piłka nożna",
-"orlik": "Piłka nożna",
-"liga": "Piłka nożna",
-"mecz": "Piłka nożna",
-
-// HOBBY - FOTOGRAFIA
-
-"fotografia": "Fotografia",
-"aparat": "Fotografia",
-"obiektyw": "Fotografia",
-"canon": "Fotografia",
-"nikon": "Fotografia",
-"sony": "Fotografia",
-"gimbal": "Fotografia",
-"lightroom": "Fotografia",
-"photoshop": "Fotografia",
-
-// RANDKI
-
-"randka": "Randki",
-"kino": "Randki",
-"kolacja": "Randki",
-"kwiaty": "Randki",
-"restauracja": "Randki",
-"tinder": "Randki",
-"badoo": "Randki",
-
-// ZAKUPY INTERNETOWE
-
-"allegro": "Zakupy internetowe",
-"amazon": "Zakupy internetowe",
-"temu": "Zakupy internetowe",
-"ebay": "Zakupy internetowe",
-"aliexpress": "Zakupy internetowe",
-"media expert": "Zakupy internetowe",
-"x-kom": "Zakupy internetowe",
-
-// GŁUPOTY
-
-"gadżet": "Głupoty",
-"pierdoły": "Głupoty",
-"zachcianka": "Głupoty",
-"impuls": "Głupoty",
-"figurka": "Głupoty",
-"dekoracja": "Głupoty",
-
-// INWESTYCJE
-
-"mbank": "Inwestycje",
-"mbank makler": "Inwestycje",
-"xtb": "Inwestycje",
-"bossa": "Inwestycje",
-"etf": "Inwestycje",
-"vwce": "Inwestycje",
-"vuaa": "Inwestycje",
-"sp500": "Inwestycje",
-"bitcoin": "Inwestycje",
-"btc": "Inwestycje",
-"ethereum": "Inwestycje",
-"eth": "Inwestycje",
-"obligacje": "Inwestycje",
-"ike": "Inwestycje",
-"ikze": "Inwestycje",
+const rules = {
+  "zabka": { category: "Codzienne zakupy", title: "Żabka" },
+  "biedronka": { category: "Codzienne zakupy", title: "Biedronka" },
+  "lidl": { category: "Codzienne zakupy", title: "Lidl" },
+  "auchan": { category: "Codzienne zakupy", title: "Auchan" },
+  "carrefour": { category: "Codzienne zakupy", title: "Carrefour" },
+  "aldi": { category: "Codzienne zakupy", title: "Aldi" },
+  "kaufland": { category: "Codzienne zakupy", title: "Kaufland" },
+  "dino": { category: "Codzienne zakupy", title: "Dino" },
+  "orlen": { category: "Transport", title: "Orlen" }, "shell": { category: "Transport", title: "Shell" },
+  "uber": { category: "Transport", title: "Uber" }, "bolt": { category: "Transport", title: "Bolt" },
+  "pkp": { category: "Transport", title: "PKP" }, "parking": { category: "Transport" },
+  "bilet": { category: "Transport" }, "mpk": { category: "Transport" },
+  "czynsz": { category: "Rachunki" }, "prad": { category: "Rachunki" }, "energia": { category: "Rachunki" },
+  "gaz": { category: "Rachunki" }, "woda": { category: "Rachunki" }, "internet": { category: "Rachunki" },
+  "telefon": { category: "Rachunki" }, "ubezpieczenie": { category: "Rachunki" },
+  "papierosy": { category: "Używki" }, "alkohol": { category: "Używki" }, "piwo": { category: "Używki" },
+  "kurs": { category: "Koszty przyszłego dochodu" }, "szkolenie": { category: "Koszty przyszłego dochodu" },
+  "reklama": { category: "Koszty przyszłego dochodu" }, "narzedzie": { category: "Koszty przyszłego dochodu" },
+  "netflix": { category: "Rozrywka" }, "spotify": { category: "Rozrywka" }, "apteka": { category: "Zdrowie" },
+  "kredyt": { category: "Finanse" }, "allegro": { category: "Zakupy internetowe" },
 };
 
-export function detectCategory(
-  text
-) {
-  const lower =
-    text.toLowerCase();
+export function normalizeText(text = "") {
+  return text.trim().replace(/\s+/g, " ").toLocaleLowerCase("pl-PL").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
 
-  for (const keyword in autoCategories) {
-    if (
-      lower.includes(keyword)
-    ) {
-      return autoCategories[
-        keyword
-      ];
-    }
+export function categorizeExpense(title) {
+  const normalized = normalizeText(title);
+  for (const [keyword, rule] of Object.entries(rules)) {
+    if (normalized.includes(keyword)) return rule;
   }
+  return { category: "Inne" };
+}
 
-  return "Inne";
+export function detectCategory(title) {
+  return categorizeExpense(title).category;
+}
+
+export function normalizeMerchant(title) {
+  const clean = title.trim().replace(/\s+/g, " ");
+  return categorizeExpense(clean).title || clean;
 }

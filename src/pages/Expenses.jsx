@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { FaTrash, FaEdit,} from "react-icons/fa";
 import ExpenseForm from "../components/ExpenseForm";
 import MonthSelector from "../components/MonthSelector";
-import EditTransactionModal from "../components/EditTransactionModal";
 
 import {getTransactions, getRegularExpenses, addTransaction, deleteTransaction,} from "../db/budgetDB";
 
@@ -54,6 +53,10 @@ const [editingItem, setEditingItem] =
         subtype: "regular",
 
         month,
+
+        date: `${month}-01`,
+
+        category: item.category || "Inne",
 
         generated: true,
 
@@ -108,6 +111,7 @@ const [editingItem, setEditingItem] =
       {showForm && (
   <ExpenseForm
     editingItem={editingItem}
+    month={month}
     onSaved={() => {
       loadData();
       setShowForm(false);
@@ -119,6 +123,7 @@ const [editingItem, setEditingItem] =
   <div>Nazwa</div>
   <div>Kwota</div>
   <div>Kategoria</div>
+  <div>Data</div>
   <div>Akcje</div>
 </div>
 
@@ -138,6 +143,7 @@ const [editingItem, setEditingItem] =
     <div className="table-type">
       {item.category}
     </div>
+    <div className="table-type">{item.date || item.month}</div>
 
     <div className="table-actions">
 

@@ -5,6 +5,7 @@ import Income from "./pages/Income";
 import Expenses from "./pages/Expenses";
 import Summary from "./pages/Summary";
 import Settings from "./pages/Settings";
+import Limits from "./pages/Limits";
 import "./styles/App.css";
 import BottomNav from "./components/BottomNav";
 function App() {
@@ -37,6 +38,7 @@ function App() {
       path="/settings"
       element={<Settings />}
     />
+    <Route path="/limits" element={<Limits />} />
 
   </Routes>
 

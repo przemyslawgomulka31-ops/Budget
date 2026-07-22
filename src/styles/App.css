@@ -374,8 +374,7 @@ TABLES
 .table-header {
 display: grid;
 
-grid-template-columns:
-3fr 1fr 1fr 90px;
+grid-template-columns: 3fr 1fr 1.3fr 1.3fr 90px;
 
 padding: 12px 16px;
 
@@ -392,8 +391,7 @@ border-bottom:
 .table-row {
 display: grid;
 
-grid-template-columns:
-3fr 1fr 1fr 90px;
+grid-template-columns: 3fr 1fr 1.3fr 1.3fr 90px;
 
 align-items: center;
 
@@ -512,7 +510,7 @@ justify-content: center;
 
 align-items: center;
 
-min-width: 60px;
+min-width: 48px;
 
 min-height: 56px;
 
@@ -608,20 +606,32 @@ font-size: 16px;
 }
 
 .table-header {
-grid-template-columns:
-2.2fr 1fr 1fr 80px;
+grid-template-columns: 2.1fr 1fr 1.15fr 1.15fr 72px;
 
 font-size: 12px;
 
 }
 
 .table-row {
-grid-template-columns:
-2.2fr 1fr 1fr 80px;
+grid-template-columns: 2.1fr 1fr 1.15fr 1.15fr 72px;
 
 padding: 8px;
 
 }
+
+.overview-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.overview-grid .summary-box { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.overview-grid strong { font-size: 18px; color: #4ade80; }
+.budget-alert, .status-message { background: #3f1515; border: 1px solid #ef4444; color: #fecaca; border-radius: 12px; padding: 14px; margin-top: 16px; }
+.page-hint { color: #9ca3af; margin: 12px 0 18px; }
+.limit-card { background: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 16px; margin-bottom: 12px; }
+.limit-heading, .limit-editor { display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+.limit-heading { margin-bottom: 12px; }
+.limit-editor { margin-top: 12px; }
+.limit-editor input { flex: 1; min-width: 0; background: #0f172a; color: white; border: 1px solid #374151; border-radius: 10px; padding: 10px; }
+.limit-editor button { background: #22c55e; color: white; border: 0; border-radius: 10px; padding: 10px 14px; font-weight: 700; }
+.progress { height: 10px; border-radius: 999px; overflow: hidden; background: #0f172a; }
+.progress-fill { height: 100%; background: #22c55e; }.danger-fill { background: #ef4444; }.danger { color: #f87171; }
 
 .table-title {
 font-size: 13px;

@@ -75,8 +75,7 @@ export default function ExpenseChart({
 
       {data.map(
         (
-          item,
-          index
+          item
         ) => (
           <div
             key={item.name}

@@ -50,6 +50,8 @@ async function generateMonth() {
 
       month: month,
 
+      date: `${month}-01`,
+
       generated: true,
 
       createdAt:
@@ -102,6 +104,7 @@ useEffect(() => {
       {showForm && (
  <IncomeForm
   editingItem={editingItem}
+  month={month}
   onSaved={() => {
     loadData();
     setShowForm(false);
@@ -115,6 +118,7 @@ useEffect(() => {
   <div>Nazwa</div>
   <div>Kwota</div>
   <div>Typ</div>
+  <div>Data</div>
   <div>Akcje</div>
 </div>
 
@@ -134,6 +138,7 @@ useEffect(() => {
     <div className="table-type">
       {item.subtype}
     </div>
+    <div className="table-type">{item.date || item.month}</div>
 
     <div className="table-actions">
 

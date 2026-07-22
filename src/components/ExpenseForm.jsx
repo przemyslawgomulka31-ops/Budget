@@ -1,187 +1,28 @@
-import {useState,useEffect,} from "react";
-import {addTransaction,updateTransaction,} from "../db/budgetDB";
-import {detectCategory,} from "../utils/autoCategories";
+import { useState } from "react";
+import { addTransaction, updateTransaction } from "../db/budgetDB";
+import { categorizeExpense, EXPENSE_CATEGORIES, normalizeMerchant } from "../utils/autoCategories";
 
-
-export default function ExpenseForm({
-  onSaved,
-  editingItem,
-}) {
-  const [title, setTitle] =
-    useState("");
-
-  const [amount, setAmount] =
-    useState("");
-
-const [category, setCategory] =
-  useState("Inne");
-
-  const [subtype, setSubtype] =
-    useState("regular");
-
-useEffect(() => {
-  if (editingItem) {
-    setTitle(editingItem.title);
-
-    setAmount(
-      editingItem.amount
-    );
-
-    setSubtype(
-      editingItem.subtype
-    );
-
-    setCategory(
-      editingItem.category
-    );
-  }
-}, [editingItem]);
+export default function ExpenseForm({ onSaved, editingItem, month }) {
+  const [title, setTitle] = useState(editingItem?.title || "");
+  const [amount, setAmount] = useState(editingItem?.amount || "");
+  const [category, setCategory] = useState(editingItem?.category || "Inne");
+  const [subtype, setSubtype] = useState(editingItem?.subtype || "regular");
+  const [date, setDate] = useState(editingItem?.date || `${editingItem?.month || month}-01`);
 
   async function save() {
-  if (!title || !amount)
-    return;
-
-  if (editingItem) {
-    await updateTransaction({
-      ...editingItem,
-
-      title,
-
-      amount:
-        Number(amount),
-
-      subtype,
-
-      category,
-    });
-  } else {
-    await addTransaction({
-      title,
-
-      amount:
-        Number(amount),
-
-      type: "expense",
-
-      subtype,
-
-      category,
-
-      month:
-        new Date()
-          .toISOString()
-          .slice(0, 7),
-
-      createdAt:
-        new Date().toISOString(),
-    });
+    if (!title.trim() || !amount || !date) return;
+    const transaction = { title: normalizeMerchant(title), amount: Number(amount), subtype, category, date, month: date.slice(0, 7) };
+    if (editingItem) await updateTransaction({ ...editingItem, ...transaction });
+    else await addTransaction({ ...transaction, type: "expense", createdAt: new Date().toISOString() });
+    onSaved();
   }
 
-  setTitle("");
-  setAmount("");
-
-  onSaved();
-}
-
-  return (
-    <div className="form">
-      <input
-  placeholder="Nazwa wydatku"
-  value={title}
-  onChange={(e) => {
-    const value =
-      e.target.value;
-
-    setTitle(value);
-
-    setCategory(
-      detectCategory(
-        value
-      )
-    );
-  }}
-/>
-
-      <input
-        type="number"
-        placeholder="Kwota"
-        value={amount}
-        onChange={(e) =>
-          setAmount(e.target.value)
-        }
-      />
-
-      <select
-        value={subtype}
-        onChange={(e) =>
-          setSubtype(
-            e.target.value
-          )
-        }
-      >
-        <option value="regular">
-          Regularne
-        </option>
-
-        <option value="daily">
-          Codzienne
-        </option>
-
-        <option value="unplanned">
-          Niezaplanowane
-        </option>
-
-<option value="investment">
-  Inwestycyjne
-</option>
-      </select>
-
-<select
-  value={category}
-  onChange={(e) =>
-    setCategory(
-      e.target.value
-    )
-  }
->
-  <option>Jedzenie</option>
-
-  <option>Transport</option>
-
-  <option>Dom</option>
-
-  <option>Rozrywka</option>
-
-  <option>Zdrowie</option>
-
-  <option>Sport</option>
-
-  <option>Auto</option>
-
-  <option>Finanse</option>
-
-  <option>Inwestycje</option>
-
-  <option>Podróże</option>
-
-  <option>Fotografia</option>
-
-  <option>Piłka nożna</option>
-
-  <option>Randki</option>
-
-  <option>Zakupy internetowe</option>
-
-  <option>Głupoty</option>
-
-  <option>Inne</option>
-</select>
-
-      <button onClick={save}>
-  {editingItem
-    ? "AKTUALIZUJ"
-    : "ZAPISZ"}
-</button>
-    </div>
-  );
+  return <div className="form">
+    <input placeholder="Nazwa wydatku" value={title} onChange={(e) => { setTitle(e.target.value); setCategory(categorizeExpense(e.target.value).category); }} />
+    <input type="number" min="0" step="0.01" placeholder="Kwota" value={amount} onChange={(e) => setAmount(e.target.value)} />
+    <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+    <select value={subtype} onChange={(e) => setSubtype(e.target.value)}><option value="regular">Regularne</option><option value="daily">Codzienne</option><option value="unplanned">Niezaplanowane</option><option value="investment">Inwestycyjne</option></select>
+    <select value={category} onChange={(e) => setCategory(e.target.value)}>{EXPENSE_CATEGORIES.map((name) => <option key={name}>{name}</option>)}</select>
+    <button onClick={save}>{editingItem ? "AKTUALIZUJ" : "ZAPISZ"}</button>
+  </div>;
 }

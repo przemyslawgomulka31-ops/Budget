@@ -7,7 +7,7 @@ import { addTransaction, deleteTransaction, getRegularIncome, getTransactions } 
 import { localMonth } from "../utils/date";
 const money = (value) => `${Number(value).toLocaleString("pl-PL", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} zł`;
 const formatDate = (value) => new Date(value).toLocaleDateString("pl-PL", { day: "numeric", month: "long" });
-const types = { regular: "Regularny", oneTime: "Jednorazowy", investment: "Inwestycyjny" };
+const types = { regular: "Regularny", oneTime: "Jednorazowy", investment: "Dochód z inwestycji" };
 export default function Income() {
   const [items, setItems] = useState([]); const [month, setMonth] = useState(localMonth()); const [showForm, setShowForm] = useState(false); const [editing, setEditing] = useState(null); const [toast, setToast] = useState("");
   async function load() { setItems((await getTransactions()).filter((item) => item.type === "income" && item.month === month).sort((a, b) => (b.date || "").localeCompare(a.date || ""))); }
